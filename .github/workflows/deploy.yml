@@ -23,10 +23,13 @@ jobs:
       - name: Install the dependencies
         run: |
           uv sync --no-dev
+      - name: Install JupyterLite extras
+        run: |
+          uv pip install jupyter-server
       - name: Build the JupyterLite site
         run: |
           cp README.md content
-          uv run jupyter lite build --contents content --output-dir dist
+          uv run jupyter lite build --contents notebooks --output-dir dist
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
